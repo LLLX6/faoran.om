@@ -833,6 +833,81 @@ body.dark .admin-section-card h3 {
     width: 100% !important;
   }
 }
+/* === الكود الجديد للتوافق مع الهواتف - نهائي ومحسّن === */
+@media (max-width: 650px) {
+  body, html {
+    width: 100vw !important;
+    min-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .sidebar {
+    width: 94vw !important;
+    min-width: unset !important;
+    max-width: 98vw !important;
+    padding: 18px 2vw 24px 2vw !important;
+    box-sizing: border-box;
+  }
+  .main {
+    margin: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    padding: 70px 2vw 12px 2vw !important;
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box;
+  }
+  .container, .content, .wrapper {
+    width: 100vw !important;
+    min-width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+  }
+  .show-modal-btn, .submit-btn, .dl-btn, .add-feedback-btn {
+    font-size: 1.01rem;
+    padding: 11px 5px !important;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 7px;
+  }
+  .card-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .section-topbar {
+    flex-direction: column !important;
+    gap: 7px !important;
+    text-align: center !important;
+  }
+  .section-topbar h2 {
+    font-size: 1.1em !important;
+  }
+  .searchbar-wrap {
+    flex-direction: column !important;
+    gap: 7px !important;
+    width: 100% !important;
+    align-items: stretch !important;
+  }
+  .show-modal-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 1.01em;
+  }
+  .searchbar {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  /* ضمان عدم قص الأزرار المتحركة أو عناصر الفلاتر */
+  .chip, .filter-row, .card-grid, .modal-box, .section-card, .provider-card {
+    max-width: 98vw !important;
+    box-sizing: border-box;
+    overflow-x: auto !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -915,52 +990,128 @@ function getAvgRating(id, manual) {
   const sum = ratings[id].reduce((a, b) => a + b, 0);
   return Math.round((sum / ratings[id].length) * 10) / 10;
 }
+// === مصفوفة محافظات وولايات سلطنة عمان ===
+const OMAN_REGIONS = [
+  {
+    name: "مسقط",
+    english: "Muscat",
+    states: ["السيب","بوشر","مطرح","العامرات","قريات","مسقط"]
+  },
+  {
+    name: "ظفار",
+    english: "Dhofar",
+    states: ["صلالة","مرباط","طاقة","سدح","رخيوت","ضلكوت","ثمريت","شليم وجزر الحلانيات","مقشن"]
+  },
+  {
+    name: "الداخلية",
+    english: "Ad Dakhiliyah",
+    states: ["نزوى","بهلاء","منح","الحمراء","أدم","إزكي","بدبد","سمائل"]
+  },
+  {
+    name: "شمال الباطنة",
+    english: "Al Batinah North",
+    states: ["صحار","السويق","شناص","الخابورة","صحم","لوى","العوابي"]
+  },
+  {
+    name: "جنوب الباطنة",
+    english: "Al Batinah South",
+    states: ["الرستاق","بركاء","نخل","العوابي","وادي المعاول","المصنعة"]
+  },
+  {
+    name: "شمال الشرقية",
+    english: "Ash Sharqiyah North",
+    states: ["إبراء","المضيبي","بدية","القابل","دماء والطائيين","ولاية وادي بني خالد"]
+  },
+  {
+    name: "جنوب الشرقية",
+    english: "Ash Sharqiyah South",
+    states: ["صور","جعلان بني بوحسن","جعلان بني بو علي","الكامل والوافي","مصيرة"]
+  },
+  {
+    name: "الظاهرة",
+    english: "Al Dhahirah",
+    states: ["عبري","ينقل","ضنك"]
+  },
+  {
+    name: "البريمي",
+    english: "Al Buraimi",
+    states: ["البريمي","محضة","السنينة"]
+  },
+  {
+    name: "مسندم",
+    english: "Musandam",
+    states: ["خصب","بخاء","دبا","مدحاء"]
+  },
+  {
+    name: "الوسطى",
+    english: "Al Wusta",
+    states: ["هيما","الدقم","محوت","الجزر"]
+  }
+];
 
 const sections = [
-  {id:"handmade", name:"الأشغال اليدوية", emoji:"🛠️", sub:[
-    {id:"carpenter", label:"نجار/نجارة", emojiM:"👨‍🔧", emojiF:"👩‍🔧"},
-    {id:"plumber", label:"سباك/سباكة", emojiM:"👨‍🔧", emojiF:"👩‍🔧"},
-    {id:"electrician", label:"كهربائي/كهربائية", emojiM:"👨‍🔧", emojiF:"👩‍🔧"},
-    {id:"blacksmith", label:"حداد/حدادة", emojiM:"👨‍🏭", emojiF:"👩‍🏭"}
-  ]},
-  {id:"equipment", name:"المعدات والآليات", emoji:"🚜", sub:[
-    {id:"shovel", label:"شيول", emojiM:"👷‍♂️", emojiF:"👷‍♀️"},
-    {id:"excavator", label:"حفار", emojiM:"👷‍♂️", emojiF:"👷‍♀️"},
-    {id:"crane", label:"رافعة", emojiM:"👷‍♂️", emojiF:"👷‍♀️"},
-    {id:"compactor", label:"ضاغطة", emojiM:"👷‍♂️", emojiF:"👷‍♀️"}
-  ]},
-  {id:"home", name:"الصيانة المنزلية", emoji:"🏡", sub:[
-    {id:"ac", label:"مكيّفات", emojiM:"🧑‍🔧", emojiF:"🧑‍🔧"},
-    {id:"pest", label:"مكافحة حشرات", emojiM:"🧑‍🔧", emojiF:"🧑‍🔧"},
-    {id:"clean", label:"تنظيف", emojiM:"🧑‍🦰", emojiF:"🧑‍🦰"}
-  ]},
-  {id:"creative", name:"الإبداعية والفنية", emoji:"🎨", sub:[
-    {id:"decor", label:"ديكور", emojiM:"👨‍🎨", emojiF:"👩‍🎨"},
-    {id:"painting", label:"نقاشة", emojiM:"👨‍🎨", emojiF:"👩‍🎨"},
-    {id:"design", label:"تصميم داخلي", emojiM:"👨‍🎨", emojiF:"👩‍🎨"}
-  ]},
-  {id:"tech", name:"التقنية والاستشارات", emoji:"💻", sub:[
-    {id:"programmer", label:"مبرمج/مبرمجة", emojiM:"👨‍💻", emojiF:"👩‍💻"},
-    {id:"consult", label:"استشاري/استشارية", emojiM:"👨‍💼", emojiF:"👩‍💼"},
-    {id:"designer", label:"مصمم/مصممة", emojiM:"👨‍💻", emojiF:"👩‍💻"}
-  ]},
-  {id:"driving", name:"سياقة ونقل", emoji:"🚗", sub:[
-    {id:"driver", label:"سائق/سائقة", emojiM:"👨‍✈️", emojiF:"👩‍✈️"},
-    {id:"truck", label:"سائق شاحنة", emojiM:"👨‍✈️", emojiF:"👩‍✈️"}
-  ]},
-  {id:"agri", name:"الخدمات الزراعية", emoji:"🌾", sub:[
-    {id:"farmer", label:"عامل زراعة/مهندس", emojiM:"👨‍🌾", emojiF:"👩‍🌾"},
-    {id:"worker", label:"خدمات زراعية عامة", emojiM:"👨‍🌾", emojiF:"👩‍🌾"}
-  ]},
-  {id:"hospitality", name:"الضيافة والمناسبات", emoji:"🍽️", sub:[
-    {id:"cook", label:"طبّاخ/طبّاخة", emojiM:"👨‍🍳", emojiF:"👩‍🍳"},
-    {id:"coffee", label:"صباب قهوة", emojiM:"👨‍🍳", emojiF:"👩‍🍳"}
-  ]},
-  {id:"office", name:"مكتبية وإدارية", emoji:"🏢", sub:[
-    {id:"secretary", label:"سكرتارية", emojiM:"👨‍💼", emojiF:"👩‍💼"},
-    {id:"account", label:"محاسبة", emojiM:"👨‍💼", emojiF:"👩‍💼"},
-    {id:"translate", label:"ترجمة", emojiM:"👨‍💼", emojiF:"👩‍💼"}
-  ]}
+  {
+    id:"handmade", name:"الأشغال اليدوية", emoji:"🪚", sub:[
+      {id:"carpenter",   label:"نجار/نجارة",   emojiM:"🪚",    emojiF:"🪚"},
+      {id:"plumber",     label:"سباك/سباكة",   emojiM:"🛁",    emojiF:"🛁"},
+      {id:"electrician", label:"كهربائي/كهربائية", emojiM:"💡", emojiF:"💡"},
+      {id:"blacksmith",  label:"حداد/حدادة",   emojiM:"⚒️",    emojiF:"⚒️"}
+    ]
+  },
+  {
+    id:"equipment", name:"المعدات والآليات", emoji:"🚜", sub:[
+      {id:"shovel",      label:"شيول",         emojiM:"🚜",    emojiF:"🚜"},
+      {id:"excavator",   label:"حفار",         emojiM:"🚧",    emojiF:"🚧"},
+      {id:"crane",       label:"رافعة",        emojiM:"🏗️",   emojiF:"🏗️"},
+      {id:"compactor",   label:"ضاغطة",        emojiM:"🚧",    emojiF:"🚧"}
+    ]
+  },
+  {
+    id:"home", name:"الصيانة المنزلية", emoji:"🏡", sub:[
+      {id:"ac",        label:"مكيّفات",          emojiM:"❄️",   emojiF:"❄️"},
+      {id:"pest",      label:"مكافحة حشرات",     emojiM:"🐜",   emojiF:"🐜"},
+      {id:"clean",     label:"تنظيف",            emojiM:"🧹",   emojiF:"🧹"}
+    ]
+  },
+  {
+    id:"creative", name:"الإبداعية والفنية", emoji:"🎨", sub:[
+      {id:"decor",     label:"ديكور",          emojiM:"🖼️",   emojiF:"🖼️"},
+      {id:"painting",  label:"نقاشة",          emojiM:"🖌️",   emojiF:"🖌️"},
+      {id:"design",    label:"تصميم داخلي",    emojiM:"🏠",   emojiF:"🏠"}
+    ]
+  },
+  {
+    id:"tech", name:"التقنية والاستشارات", emoji:"💻", sub:[
+      {id:"programmer", label:"مبرمج/مبرمجة",   emojiM:"💻",   emojiF:"💻"},
+      {id:"consult",    label:"استشاري/استشارية", emojiM:"📊", emojiF:"📊"},
+      {id:"designer",   label:"مصمم/مصممة",     emojiM:"🖥️",   emojiF:"🖥️"}
+    ]
+  },
+  {
+    id:"driving", name:"سياقة ونقل", emoji:"🚚", sub:[
+      {id:"driver",    label:"سائق/سائقة",        emojiM:"🚗",   emojiF:"🚗"},
+      {id:"truck",     label:"سائق شاحنة",        emojiM:"🚚",   emojiF:"🚚"}
+    ]
+  },
+  {
+    id:"agri", name:"الخدمات الزراعية", emoji:"🌾", sub:[
+      {id:"farmer",    label:"عامل زراعة/مهندس",  emojiM:"🌱",   emojiF:"🌱"},
+      {id:"worker",    label:"خدمات زراعية عامة",  emojiM:"🧑‍🌾", emojiF:"🧑‍🌾"}
+    ]
+  },
+  {
+    id:"hospitality", name:"الضيافة والمناسبات", emoji:"🍽️", sub:[
+      {id:"cook",      label:"طبّاخ/طبّاخة",     emojiM:"👨‍🍳", emojiF:"👩‍🍳"},
+      {id:"coffee",    label:"صباب قهوة",        emojiM:"☕",    emojiF:"☕"}
+    ]
+  },
+  {
+    id:"office", name:"مكتبية وإدارية", emoji:"🏢", sub:[
+      {id:"secretary", label:"سكرتارية",        emojiM:"🗂️",   emojiF:"🗂️"},
+      {id:"account",   label:"محاسبة",          emojiM:"📊",   emojiF:"📊"},
+      {id:"translate", label:"ترجمة",           emojiM:"🌐",   emojiF:"🌐"}
+    ]
+  }
 ];
 
 // --- Utility functions ---
@@ -1056,42 +1207,123 @@ function renderSections() {
   `;
 }
 
-// Providers list in a section (only approved)
+// ========== الكود الجديد لعرض التخصصات الفرعية (الفلاتر) ==========
+
 function renderSectionProviders(sectionId) {
   const section = sections.find(s => s.id === sectionId);
-  if (!section) {
-    main.innerHTML = `<p style="color:#a00; padding:20px;">القسم غير موجود!</p>`;
-    return;
-  }
-  // Filter only approved providers (not in requests)
-  const filteredProviders = providers.filter(p => p.section === sectionId);
+  if (!section) return;
+  let selectedSubSpec = "all";
+  let selectedGov = "";
+  let selectedWil = "";
+
+  // فلترة التخصص الفرعي
+  window.filterSubSpec = function(subId) {
+    selectedSubSpec = subId;
+    filterSectionProviders();
+  };
 
 main.innerHTML = `
-  <div class="section-topbar" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between;margin-bottom:10px;">
-    <button class="show-modal-btn" style="min-width:88px;" onclick="navigate('home')">⬅️ عودة</button>
-    <h2 style="margin:0;flex:1;text-align:center;font-size:1.33em;">${section.emoji} ${section.name}</h2>
-    <span style="width:88px;"></span>
+  <button type="button" class="back-btn"
+    onclick="navigate('home')" aria-label="الرجوع للأقسام الرئيسية"
+    style="
+      display: inline-flex; align-items: center; gap: 7px;
+      background: #fff; color: #18456e;
+      border: none; border-radius: 28px;
+      box-shadow: 0 2px 10px #18456e14;
+      font-weight: 800; font-size: 1.08em;
+      padding: 8px 22px 8px 14px;
+      margin-bottom: 18px; margin-top: 16px;
+      cursor: pointer; transition: box-shadow .18s, background .14s, color .18s;
+      outline: none;
+    "
+    onmouseover="this.style.background='#f3f8fa';this.style.color='#27bda5';"
+    onmouseout="this.style.background='#fff';this.style.color='#18456e';"
+  >
+    <span style="
+      font-size:1.28em;
+      font-weight:bold;
+      margin-left:3px;
+      margin-top:-1px;
+      line-height:1;
+      ">‹</span>
+    <span style="font-weight:700;">الأقسام الرئيسية</span>
+  </button>
+  <h2 style="margin-top:0;">${section.emoji} ${section.name}</h2>
+  <div style="display:flex;gap:7px;align-items:center;overflow-x:auto;padding:7px 0 2px 0;">
+    <button type="button" class="chip ${selectedSubSpec==='all' ? 'active' : ''}"
+      onclick="filterSubSpec('all')" aria-label="عرض الجميع" title="عرض الجميع">🌐 <span style="font-size:.88em;">الكل</span></button>
+    ${section.sub.map(sub => `
+      <button type="button" class="chip ${selectedSubSpec===sub.id ? 'active' : ''}"
+        onclick="filterSubSpec('${sub.id}')" aria-label="${sub.label}">
+        ${sub.emojiM || "🔧"}<span style="font-size:.93em;margin-right:4px;">${sub.label}</span>
+      </button>
+    `).join("")}
   </div>
-  <div class="searchbar-wrap" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px;">
-    <input id="searchBar" class="searchbar" type="search" placeholder="ابحث في هذا القسم..." aria-label="بحث في القسم" autofocus style="flex:2;min-width:150px;">
-    <button class="show-modal-btn" onclick="navigate('register')" style="flex:1;min-width:130px;">+ طلب تسجيل مزوّد خدمة</button>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;">
+    <select id="govSelect" style="font-size:1em;padding:7px 10px;border-radius:8px;">
+      <option value="">كل المحافظات</option>
+      ${OMAN_REGIONS.map(r=>`<option value="${r.name}">${r.name}</option>`).join("")}
+    </select>
+    <select id="wilSelect" style="font-size:1em;padding:7px 10px;border-radius:8px;display:none;">
+      <option value="">كل الولايات</option>
+    </select>
   </div>
-  <div id="providerList"></div>
-`;
+  <style>
+      .chip {
+        display: inline-flex; align-items: center; gap:4px;
+        background: #f5f7fa; color: #18456e; border: none; border-radius: 22px;
+        font-size: 1em; font-weight: 600; padding: 7px 13px 6px 13px; margin:0;
+        cursor:pointer; transition: background 0.15s,color 0.15s,box-shadow 0.15s;
+        box-shadow: 0 2px 6px #0001;
+        min-width: 0; outline: none;
+      }
+      .chip.active {
+        background: #27bda5; color: #fff; box-shadow: 0 2px 12px #27bda533;
+      }
+      .chip:focus { outline:2px solid #27bda5;}
+      .fab-add {
+        position: fixed; bottom: 22px; left: 22px; z-index: 1200;
+        width: 38px; height: 38px; border-radius: 50%; box-shadow: 0 2px 10px #27bda533;
+        background: linear-gradient(135deg, #27bda5, #18456e);
+        color: #fff; font-size: 1.7em; display: flex; align-items: center; justify-content: center;
+        border:none; cursor:pointer; transition: background 0.19s, box-shadow 0.17s;
+      }
+    </style>
+    <div id="providerList"></div>
+    <button class="fab-add" onclick="navigate('register')" aria-label="إضافة مزود جديد">＋</button>
+  `;
 
-  const searchBar = document.getElementById("searchBar");
-  searchBar.addEventListener("input", () => {
-    const query = searchBar.value.trim().toLowerCase();
-    const filtered = filteredProviders.filter(p => {
-      const sec = sections.find(s => s.id === p.section) || {};
-      return p.name.toLowerCase().includes(query)
-        || (sec.name || "").toLowerCase().includes(query)
-        || (p.bio || "").toLowerCase().includes(query);
-    });
-    renderProviders("providerList", filtered);
-  });
+  // تفعيل فلاتر المحافظة والولاية
+  const govSel = document.getElementById("govSelect");
+  const wilSel = document.getElementById("wilSelect");
+  govSel.onchange = function() {
+    selectedGov = this.value;
+    selectedWil = "";
+    if (selectedGov) {
+      wilSel.style.display = "";
+      wilSel.innerHTML = `<option value="">كل الولايات</option>`;
+      const region = OMAN_REGIONS.find(r => r.name === selectedGov);
+      if (region) region.states.forEach(w => wilSel.innerHTML += `<option value="${w}">${w}</option>`);
+    } else {
+      wilSel.style.display = "none";
+      wilSel.innerHTML = `<option value="">كل الولايات</option>`;
+    }
+    filterSectionProviders();
+  };
+  wilSel.onchange = function() {
+    selectedWil = this.value;
+    filterSectionProviders();
+  };
 
-  renderProviders("providerList", filteredProviders);
+  // دالة الفلترة حسب كل المعايير
+  function filterSectionProviders() {
+    let list = providers.filter(p => p.section === sectionId);
+    if (selectedSubSpec !== "all") list = list.filter(p => p.sub === selectedSubSpec);
+    if (selectedGov) list = list.filter(p => p.governorate === selectedGov);
+    if (selectedWil) list = list.filter(p => p.wilayah === selectedWil);
+    renderProviders("providerList", list);
+  }
+  filterSectionProviders(); // أول مرة يعرض الكل
 }
 
 function renderProviders(containerId, list) {
@@ -1218,33 +1450,40 @@ function renderRegister() {
       <select id="section" name="section" required></select>
       <label class="tooltip" for="sub">التخصص الفرعي *</label>
       <select id="sub" name="sub" required disabled></select>
-      <label class="tooltip" for="location">المنطقة/الولاية *</label>
-      <input id="location" name="location" type="text" required />
+      <label class="tooltip" for="governorate">المحافظة *</label>
+      <select id="governorate" name="governorate" required>
+        <option value="">اختر المحافظة</option>
+        ${OMAN_REGIONS.map(r => `<option value="${r.name}">${r.name}</option>`).join("")}
+      </select>
+      <label class="tooltip" for="wilayah">الولاية *</label>
+      <select id="wilayah" name="wilayah" required disabled>
+        <option value="">اختر الولاية</option>
+      </select>
       <label class="tooltip" for="phone">رقم الهاتف (واتساب) *</label>
       <input id="phone" name="phone" type="tel" required />
       <label class="tooltip" for="civilid">رقم الهوية/الرقم المدني *</label>
       <input id="civilid" name="civilid" type="text" required />
-<label class="tooltip" for="availabilityOptions">أوقات التوفر (اختياري):</label>
-<div id="availabilityOptions" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px;">
-  <label><input type="checkbox" name="availability" value="صباحاً كل يوم"> صباحاً كل يوم</label>
-  <label><input type="checkbox" name="availability" value="مساءً كل يوم"> مساءً كل يوم</label>
-  <label><input type="checkbox" name="availability" value="كل الأيام"> كل الأيام</label>
-  <label><input type="checkbox" name="availability" value="الجمعة"> الجمعة</label>
-  <label><input type="checkbox" name="availability" value="صباح الجمعة"> صباح الجمعة</label>
-  <label><input type="checkbox" name="availability" value="مساء الجمعة"> مساء الجمعة</label>
-  <label><input type="checkbox" name="availability" value="الأحد"> الأحد</label>
-  <label><input type="checkbox" name="availability" value="الاثنين"> الاثنين</label>
-  <label><input type="checkbox" name="availability" value="الثلاثاء"> الثلاثاء</label>
-  <label><input type="checkbox" name="availability" value="الأربعاء"> الأربعاء</label>
-  <label><input type="checkbox" name="availability" value="الخميس"> الخميس</label>
-  <label><input type="checkbox" name="availability" value="السبت"> السبت</label>
-</div>
+      <label class="tooltip" for="availabilityOptions">أوقات التوفر (اختياري):</label>
+      <div id="availabilityOptions" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px;">
+        <label><input type="checkbox" name="availability" value="صباحاً كل يوم"> صباحاً كل يوم</label>
+        <label><input type="checkbox" name="availability" value="مساءً كل يوم"> مساءً كل يوم</label>
+        <label><input type="checkbox" name="availability" value="كل الأيام"> كل الأيام</label>
+        <label><input type="checkbox" name="availability" value="الجمعة"> الجمعة</label>
+        <label><input type="checkbox" name="availability" value="صباح الجمعة"> صباح الجمعة</label>
+        <label><input type="checkbox" name="availability" value="مساء الجمعة"> مساء الجمعة</label>
+        <label><input type="checkbox" name="availability" value="الأحد"> الأحد</label>
+        <label><input type="checkbox" name="availability" value="الاثنين"> الاثنين</label>
+        <label><input type="checkbox" name="availability" value="الثلاثاء"> الثلاثاء</label>
+        <label><input type="checkbox" name="availability" value="الأربعاء"> الأربعاء</label>
+        <label><input type="checkbox" name="availability" value="الخميس"> الخميس</label>
+        <label><input type="checkbox" name="availability" value="السبت"> السبت</label>
+      </div>
       <label class="tooltip" for="bio">الخبرة أو نبذة (اختياري)</label>
       <textarea id="bio" name="bio" rows="3"></textarea>
       <button class="submit-btn" type="submit">إرسال الطلب</button>
     </form>
   `;
-  // Populate القسم
+  // Populate الأقسام الرئيسية
   const sectionSelect = document.getElementById("section");
   const subSelect = document.getElementById("sub");
   sectionSelect.innerHTML = `<option value="">اختر القسم</option>` +
@@ -1261,6 +1500,19 @@ function renderRegister() {
       subSelect.disabled = true;
     }
   });
+
+  // المحافظات والولايات Dropdown متسلسل تلقائيًا
+  const govSel = document.getElementById("governorate");
+  const wilSel = document.getElementById("wilayah");
+  govSel.addEventListener("change", function() {
+    wilSel.innerHTML = '<option value="">اختر الولاية</option>';
+    wilSel.disabled = !this.value;
+    if (this.value) {
+      const region = OMAN_REGIONS.find(r => r.name === this.value);
+      if (region) region.states.forEach(w => wilSel.innerHTML += `<option value="${w}">${w}</option>`);
+    }
+  });
+
   // Handle submit
   document.getElementById("registerForm").addEventListener("submit", e => {
     e.preventDefault();
@@ -1275,28 +1527,42 @@ function submitRequest() {
   const gender = document.getElementById("gender").value;
   const section = document.getElementById("section").value;
   const sub = document.getElementById("sub").value;
-  const location = document.getElementById("location").value.trim();
+  const governorate = document.getElementById("governorate").value.trim();
+  const wilayah = document.getElementById("wilayah").value.trim();
   const phoneRaw = document.getElementById("phone").value.trim();
   const civilidRaw = document.getElementById("civilid").value.trim();
   const bio = document.getElementById("bio").value.trim();
   const availability = Array.from(document.querySelectorAll("#availabilityOptions input[name='availability']:checked")).map(x=>x.value);
 
+  // ⭐️ اجمع اسم المنطقة تلقائيًا
+  const location = governorate && wilayah ? `${governorate} - ${wilayah}` : "";
 
-  if (!name || !nationality || !gender || !section || !sub || !location || !phoneRaw || !civilidRaw) {
+  // ✅ تحقق من الحقول المطلوبة
+  if (!name || !nationality || !gender || !section || !sub || !governorate || !wilayah || !phoneRaw || !civilidRaw) {
     toast("يرجى ملء جميع الحقول المطلوبة بشكل صحيح.");
     return;
   }
+
+  // تحقق من التكرار
   const existsInProviders = providers.some(p => b64d(p.civilid) === civilidRaw);
   const existsInRequests = requests.some(r => b64d(r.civilid) === civilidRaw);
   if (existsInProviders || existsInRequests) {
     toast("رقم الهوية/الرقم المدني مسجل بالفعل.");
     return;
   }
+
+  // خزّن الهاتف والرقم المدني مشفّرين
   const phone = b64e(phoneRaw);
   const civilid = b64e(civilidRaw);
+
+  // الطلب الجديد
   const newRequest = {
     id: Date.now() + Math.random().toString(36).slice(2,8),
-    name, nationality, gender, section, sub, location, phone, civilid, availability, bio,
+    name, nationality, gender, section, sub,
+    governorate,       // (جديد)
+    wilayah,           // (جديد)
+    location,          // (يجمع المحافظة والولاية)
+    phone, civilid, availability, bio,
     rating: 0,
     created: new Date().toISOString(),
     updated: new Date().toISOString()
