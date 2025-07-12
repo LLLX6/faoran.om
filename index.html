@@ -588,57 +588,58 @@
   .add-feedback-btn:hover {
     background: #1f9586;
   }
-  /* Charts Wrap */
 .charts-wrap {
   display: flex;
-  gap: 12px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-bottom: 8px;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: stretch;
 }
 .chart-card {
-  min-width: 140px;
-  max-width: 230px;
-  flex: 0 0 auto;
-  box-shadow: 0 2px 8px #0001;
-  border-radius: 12px;
+  min-width: 270px;
+  max-width: 390px;
+  flex: 1 1 350px;
+  box-shadow: 0 3px 16px #18456e22;
+  border-radius: 18px;
   background: #fff;
-  padding: 8px 5px 8px 5px;
-  margin: 0;
-  height: 150px;
+  padding: 18px 14px 18px 14px;
+  margin: 0 0 18px 0;
+  height: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  transition: box-shadow .22s;
 }
 .chart-title {
-  font-size: 1em;
-  margin-bottom: 2px;
-  white-space: nowrap;
+  font-size: 1.25em;
+  margin-bottom: 7px;
+  font-weight: 700;
+  color: #18456e;
+  text-align: center;
+  letter-spacing: 0.2px;
 }
 .canvas-chart {
   max-width: 100% !important;
-  max-height: 92px !important;
-  margin-top: 2px;
+  max-height: 210px !important;
+  margin-top: 12px;
 }
-@media (max-width: 650px) {
+@media (max-width: 900px) {
   .charts-wrap {
-    gap: 7px;
+    flex-direction: column;
+    gap: 14px;
+    align-items: stretch;
   }
   .chart-card {
-    min-width: 110px;
-    max-width: 150px;
-    height: 98px;
-    padding: 4px 2px;
+    min-width: 96vw;
+    max-width: 98vw;
+    height: 300px;
+    padding: 10px 4vw 12px 4vw;
+  }
+  .canvas-chart {
+    max-height: 180px !important;
   }
 }
-  @media (max-width: 900px) {
-    .charts-wrap {
-      flex-direction: column;
-      gap: 12px;
-    }
-  }
   @media (max-width: 600px) {
     .modal-box {
       max-width: 95vw;
@@ -712,21 +713,49 @@
     user-select: none;
   }
 .stats-cards {
-  display: flex;
-  gap: 14px;
-  margin-bottom: 15px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px 22px;
+  margin-bottom: 24px;
+  align-items: stretch;
 }
 .stat-card {
   background: #fff;
-  border-radius: 11px;
-  box-shadow: 0 2px 10px #0001;
-  padding: 14px 17px;
-  font-size: 1.07em;
-  min-width: 135px;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px #18456e14;
+  padding: 21px 12px 17px 12px;
+  font-size: 1.12em;
   text-align: center;
-  font-weight: 600;
-  margin-bottom: 6px;
+  font-weight: 700;
+  transition: box-shadow 0.16s;
+  min-height: 70px;
+  min-width: 0;
+  color: #18456e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.stat-card span {
+  display: block;
+  font-size: 1.4em;
+  color: #27bda5;
+  font-weight: 900;
+  margin-top: 7px;
+  margin-bottom: 1px;
+  letter-spacing: 0.2px;
+}
+body.dark .stat-card { background: #232834; color: #fff; }
+body.dark .stat-card span { color: #ffd200; }
+@media (max-width: 800px) {
+  .stats-cards {
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 12px 7px;
+  }
+  .stat-card {
+    font-size: 1em;
+    padding: 15px 8px;
+    min-height: 58px;
+  }
 }
 body.dark .stat-card { background: #232834; color: #fff; }
 .stat-card span { font-size: 1.35em; color: var(--primary); margin-right: 6px; }
@@ -753,6 +782,56 @@ body.dark .admin-section-card {
 }
 body.dark .admin-section-card h3 {
   color: #ffd200;
+}
+/* === الكود الجديد للتوافق مع الهواتف === */
+@media (max-width: 650px) {
+  .sidebar {
+    width: 90vw;
+    min-width: unset;
+    max-width: 96vw;
+    padding: 18px 4vw 24px 2vw;
+  }
+  .main {
+    margin-right: 0 !important;
+    padding: 70px 2vw 12px 2vw;
+    min-width: 100vw;
+    max-width: 100vw;
+  }
+  .show-modal-btn, .submit-btn, .dl-btn, .add-feedback-btn {
+    font-size: 1.01rem;
+    padding: 11px 5px !important;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 7px;
+  }
+  .card-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+  /* الترتيب الجديد للواجهة العلوية والبحث على الجوال */
+  .section-topbar {
+    flex-direction: column !important;
+    gap: 7px !important;
+    text-align: center !important;
+  }
+  .section-topbar h2 {
+    font-size: 1.1em !important;
+  }
+  .searchbar-wrap {
+    flex-direction: column !important;
+    gap: 7px !important;
+    width: 100% !important;
+    align-items: stretch !important;
+  }
+  .show-modal-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 1.01em;
+  }
+  .searchbar {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
 }
 </style>
 </head>
@@ -826,6 +905,9 @@ let requests  = JSON.parse(localStorage.getItem(STORAGE_KEYS.requests)  || "[]")
 let feedbacks = JSON.parse(localStorage.getItem(STORAGE_KEYS.feedbacks) || "[]");
 let ratings   = JSON.parse(localStorage.getItem(STORAGE_KEYS.ratings)   || "{}");
 let adminActive = sessionStorage.getItem("admin") === "on";
+// ====== المتغيرات الخاصة بصفحات عرض العمال ======
+let currentPage = 1;    // الصفحة الحالية
+const perPage = 6;      // عدد البطاقات في كل صفحة
 
 function getAvgRating(id, manual) {
   if (typeof manual === "number" && manual > 0) return manual;
@@ -984,15 +1066,18 @@ function renderSectionProviders(sectionId) {
   // Filter only approved providers (not in requests)
   const filteredProviders = providers.filter(p => p.section === sectionId);
 
-  main.innerHTML = `
-    <button class="show-modal-btn" style="float:left; margin-top:-6px;" onclick="navigate('home')">⬅️ عودة</button>
-    <h2>${section.emoji} ${section.name}</h2>
-    <div class="searchbar-wrap" style="margin-top:18px;">
-      <input id="searchBar" class="searchbar" type="search" placeholder="ابحث في هذا القسم..." aria-label="بحث في القسم" autofocus>
-      <button class="show-modal-btn" onclick="navigate('register')">+ طلب تسجيل مزوّد خدمة</button>
-    </div>
-    <div id="providerList"></div>
-  `;
+main.innerHTML = `
+  <div class="section-topbar" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between;margin-bottom:10px;">
+    <button class="show-modal-btn" style="min-width:88px;" onclick="navigate('home')">⬅️ عودة</button>
+    <h2 style="margin:0;flex:1;text-align:center;font-size:1.33em;">${section.emoji} ${section.name}</h2>
+    <span style="width:88px;"></span>
+  </div>
+  <div class="searchbar-wrap" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px;">
+    <input id="searchBar" class="searchbar" type="search" placeholder="ابحث في هذا القسم..." aria-label="بحث في القسم" autofocus style="flex:2;min-width:150px;">
+    <button class="show-modal-btn" onclick="navigate('register')" style="flex:1;min-width:130px;">+ طلب تسجيل مزوّد خدمة</button>
+  </div>
+  <div id="providerList"></div>
+`;
 
   const searchBar = document.getElementById("searchBar");
   searchBar.addEventListener("input", () => {
@@ -1034,7 +1119,11 @@ container.insertAdjacentHTML("beforeend", `
       <div class="row"><span class="label">التخصص:</span><span class="value">${sub.label || "-"}</span></div>
       <div class="row"><span class="label">المنطقة:</span><span class="value">${p.location}</span></div>
       <div class="row"><span class="label">الخبرة:</span><span class="value">${(p.bio||"-")}</span></div>
-      <div class="row"><span class="label">التوفر:</span><span class="value">${(p.availability||[]).join("، ") || "-"}</span></div>
+<div class="row"><span class="label">التوفر:</span>
+  <span class="value">
+    ${Array.isArray(p.availability) && p.availability.length ? p.availability.join("، ") : "-"}
+  </span>
+</div>
       <div class="row"><span class="stars" title="متوسط التقييم">${renderStars(avgRating)}</span></div>
       <div class="card-actions" role="group" aria-label="إجراءات المزود">
         <button class="call" aria-label="اتصال ${p.name}" type="button" onclick="window.location.href='tel:${b64d(p.phone)}'">📞 اتصال</button>
@@ -1135,22 +1224,21 @@ function renderRegister() {
       <input id="phone" name="phone" type="tel" required />
       <label class="tooltip" for="civilid">رقم الهوية/الرقم المدني *</label>
       <input id="civilid" name="civilid" type="text" required />
-      <label class="tooltip" for="availability">أوقات التوفر (اختياري):</label>
-      <select id="availability" name="availability" multiple style="height:95px;">
-        <option value="صباحاً كل يوم">صباحاً كل يوم</option>
-        <option value="مساءً كل يوم">مساءً كل يوم</option>
-        <option value="كل الأيام">كل الأيام</option>
-        <option value="الجمعة">الجمعة</option>
-        <option value="صباح الجمعة">صباح الجمعة</option>
-        <option value="مساء الجمعة">مساء الجمعة</option>
-        <option value="الأحد">الأحد</option>
-        <option value="الاثنين">الاثنين</option>
-        <option value="الثلاثاء">الثلاثاء</option>
-        <option value="الأربعاء">الأربعاء</option>
-        <option value="الخميس">الخميس</option>
-        <option value="الجمعة">الجمعة</option>
-        <option value="السبت">السبت</option>
-      </select>
+<label class="tooltip" for="availabilityOptions">أوقات التوفر (اختياري):</label>
+<div id="availabilityOptions" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px;">
+  <label><input type="checkbox" name="availability" value="صباحاً كل يوم"> صباحاً كل يوم</label>
+  <label><input type="checkbox" name="availability" value="مساءً كل يوم"> مساءً كل يوم</label>
+  <label><input type="checkbox" name="availability" value="كل الأيام"> كل الأيام</label>
+  <label><input type="checkbox" name="availability" value="الجمعة"> الجمعة</label>
+  <label><input type="checkbox" name="availability" value="صباح الجمعة"> صباح الجمعة</label>
+  <label><input type="checkbox" name="availability" value="مساء الجمعة"> مساء الجمعة</label>
+  <label><input type="checkbox" name="availability" value="الأحد"> الأحد</label>
+  <label><input type="checkbox" name="availability" value="الاثنين"> الاثنين</label>
+  <label><input type="checkbox" name="availability" value="الثلاثاء"> الثلاثاء</label>
+  <label><input type="checkbox" name="availability" value="الأربعاء"> الأربعاء</label>
+  <label><input type="checkbox" name="availability" value="الخميس"> الخميس</label>
+  <label><input type="checkbox" name="availability" value="السبت"> السبت</label>
+</div>
       <label class="tooltip" for="bio">الخبرة أو نبذة (اختياري)</label>
       <textarea id="bio" name="bio" rows="3"></textarea>
       <button class="submit-btn" type="submit">إرسال الطلب</button>
@@ -1191,7 +1279,8 @@ function submitRequest() {
   const phoneRaw = document.getElementById("phone").value.trim();
   const civilidRaw = document.getElementById("civilid").value.trim();
   const bio = document.getElementById("bio").value.trim();
-  const availability = Array.from(document.getElementById("availability").selectedOptions).map(o=>o.value);
+  const availability = Array.from(document.querySelectorAll("#availabilityOptions input[name='availability']:checked")).map(x=>x.value);
+
 
   if (!name || !nationality || !gender || !section || !sub || !location || !phoneRaw || !civilidRaw) {
     toast("يرجى ملء جميع الحقول المطلوبة بشكل صحيح.");
@@ -1290,6 +1379,9 @@ function renderAdmin() {
       <div class="stat-card">طلبات الانتظار <span id="statRequests"></span></div>
       <div class="stat-card">متوسط التقييم <span id="statAvgRating"></span></div>
       <div class="stat-card">أشهر جنسية <span id="statTopNat"></span></div>
+<div class="stat-card">المناطق المغطاة <span id="statLocations"></span></div>
+<div class="stat-card">أنشط قسم <span id="statActiveSection"></span></div>
+  <div class="stat-card">نسبة الذكور إلى الإناث <span id="statGender"></span></div>
     </div>
 
     <div class="admin-section-card" aria-label="طلبات التسجيل الجديدة">
@@ -1328,7 +1420,10 @@ function renderAdmin() {
     </div>
   `;
   updateStatsCards();
-  document.getElementById("adminSearch").addEventListener("input", renderAdminLists);
+  document.getElementById("adminSearch").addEventListener("input", function() {
+  renderAdminLists(1, perPage);
+});
+
   document.getElementById("downloadDataBtn").addEventListener("click", downloadAllData);
   document.getElementById("downloadPdfBtn").addEventListener("click", downloadAllDataPdf);
   document.getElementById("addFeedbackAdminBtn").addEventListener("click", showFeedbackModal);
@@ -1356,22 +1451,30 @@ function renderRequests() {
   sortedRequests.forEach((r, i) => {
     const sec = sections.find(s => s.id === r.section) || {};
     const sub = (sec.sub || []).find(x => x.id === r.sub) || {};
-    container.insertAdjacentHTML("beforeend", `
-      <article class="provider-card" tabindex="0" aria-label="طلب تسجيل مزود خدمة: ${r.name}">
-        <div class="provider-emoji">${r.gender === "F" ? (sub.emojiF || sec.emoji) : (sub.emojiM || sec.emoji)}</div>
-        <div class="provider-info">
-          <div style="font-size:1.06em; font-weight:700;">${r.name}</div>
-          <div class="row"><span class="label">الجنسية:</span><span class="value">${r.nationality}</span></div>
-          <div class="row"><span class="label">القسم:</span><span class="value">${sec.name || "-"}</span></div>
-          <div class="row"><span class="label">التخصص:</span><span class="value">${sub.label || "-"}</span></div>
-          <div class="row"><span class="label">المنطقة:</span><span class="value">${r.location}</span></div>
-          <div class="card-actions" role="group" aria-label="إجراءات الطلب">
-            <button class="rate" type="button" aria-label="قبول الطلب" onclick="approveRequest(${i})">✔️ قبول</button>
-            <button class="delete" type="button" aria-label="رفض الطلب" onclick="rejectRequest(${i})">✖ رفض</button>
-          </div>
-        </div>
-      </article>
-    `);
+container.insertAdjacentHTML("beforeend", `
+  <article class="provider-card" tabindex="0" aria-label="طلب تسجيل مزود خدمة: ${r.name}">
+    <div class="provider-emoji">${r.gender === "F" ? (sub.emojiF || sec.emoji) : (sub.emojiM || sec.emoji)}</div>
+    <div class="provider-info">
+      <div style="font-size:1.06em; font-weight:700;">${r.name}</div>
+      <div class="row"><span class="label">الجنسية:</span><span class="value">${r.nationality}</span></div>
+      <div class="row"><span class="label">القسم:</span><span class="value">${sec.name || "-"}</span></div>
+      <div class="row"><span class="label">التخصص:</span><span class="value">${sub.label || "-"}</span></div>
+      <div class="row"><span class="label">المنطقة:</span><span class="value">${r.location}</span></div>
+<div class="row"><span class="label">رقم الهاتف:</span>
+  <span class="value" style="direction:ltr">${b64d(r.phone)}</span>
+</div>
+<div class="row"><span class="label">الرقم المدني:</span>
+  <span class="value" style="direction:ltr">${b64d(r.civilid) || "—"}</span>
+</div>
+<div class="card-actions" role="group" aria-label="إجراءات الطلب">
+        <button class="call" type="button" aria-label="اتصال" onclick="window.location.href='tel:${b64d(r.phone)}'">📞 اتصال</button>
+        <button class="whatsapp" type="button" aria-label="واتساب" onclick="openWhatsApp('${b64d(r.phone)}','${r.name}','${sub.label || "-"}','${(r.availability||[]).join("، ") || "-"}')">💬 واتساب</button>
+        <button class="rate" type="button" aria-label="قبول الطلب" onclick="approveRequest(${i})">✔️ قبول</button>
+        <button class="delete" type="button" aria-label="رفض الطلب" onclick="rejectRequest(${i})">✖ رفض</button>
+      </div>
+    </div>
+  </article>
+`);
   });
 }
 
@@ -1395,11 +1498,12 @@ function rejectRequest(idx) {
   toast("تم رفض وحذف طلب التسجيل");
   renderRequests();
 }
-
-// Render admin provider list filtered by search
-function renderAdminLists() {
+// Render admin provider list filtered by search (مع تصفح صفحات pagination)
+function renderAdminLists(page = 1, perPage = 6) {
+  currentPage = page; // لحفظ رقم الصفحة الحالي
   const container = document.getElementById("adminList");
   if (!container) return;
+
   const query = (document.getElementById("adminSearch")?.value || "").trim().toLowerCase();
   const filtered = providers.filter(p => {
     const secName = (sections.find(s => s.id === p.section) || {}).name || "";
@@ -1407,20 +1511,28 @@ function renderAdminLists() {
            p.nationality.toLowerCase().includes(query) ||
            secName.toLowerCase().includes(query) ||
            (p.bio || "").toLowerCase().includes(query) ||
-           (b64d(p.civilid) || "").includes(query); // البحث برقم الهوية
+           (b64d(p.civilid) || "").includes(query);
   });
 
-  if(filtered.length === 0) {
+  if (filtered.length === 0) {
     container.innerHTML = `<p style="padding:12px; color:#666;">لا توجد نتائج مطابقة للبحث.</p>`;
     return;
   }
   container.innerHTML = "";
 
-  // --- التعديل يبدأ هنا ---
+  // ترتيب حسب آخر تحديث أو إضافة
   const sortedProviders = [...filtered].sort(
     (a, b) => new Date(b.updated || b.created) - new Date(a.updated || a.created)
   );
-  sortedProviders.forEach((p,i) => {
+
+  // بيانات التصفح
+  const totalPages = Math.ceil(sortedProviders.length / perPage);
+  const startIdx = (page - 1) * perPage;
+  const endIdx = startIdx + perPage;
+  const pageItems = sortedProviders.slice(startIdx, endIdx);
+
+  // عرض البطاقات
+  pageItems.forEach((p, i) => {
     const sec = sections.find(s => s.id === p.section) || {};
     const sub = (sec.sub || []).find(x => x.id === p.sub) || {};
     const emoji = p.gender === "F" ? (sub.emojiF || sec.emoji) : (sub.emojiM || sec.emoji);
@@ -1437,32 +1549,67 @@ function renderAdminLists() {
           <div class="row" style="font-size:0.82em;color:#999;">
             أضيف في: ${(p.created || "---").split("T")[0]} | عدّل في: ${(p.updated || "---").split("T")[0]}
           </div>
-          <div class="card-actions" role="group" aria-label="إجراءات المزود">
-            <button class="edit" type="button" aria-label="تعديل ${p.name}" onclick="openEditModal(${i})">✏️ تعديل</button>
-            <button class="rate" type="button" aria-label="تقييم ${p.name}" onclick="openRatingModal('${p.id}')">⭐ تقييم</button>
-            <button class="delete" type="button" aria-label="حذف ${p.name}" onclick="deleteProvider(${i})">🗑️ حذف</button>
-          </div>
+      <div class="card-actions" role="group" aria-label="إجراءات المزود">
+        <button class="edit" type="button" aria-label="تعديل ${p.name}" onclick="openEditModal('${p.id}')">✏️ تعديل</button>
+        <button class="rate" type="button" aria-label="تقييم ${p.name}" onclick="openRatingModal('${p.id}')">⭐ تقييم</button>
+        <button class="delete" type="button" aria-label="حذف ${p.name}" onclick="deleteProvider('${p.id}')">🗑️ حذف</button>
+      </div>
         </div>
       </article>
     `);
   });
-  // --- التعديل ينتهي هنا ---
+
+  // --- ترقيم الصفحات Pagination أفقي أنيق ---
+  if (totalPages > 1) {
+    let nav = `<div style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center;margin:18px 0 6px;">`;
+    nav += `<button class="submit-btn" style="padding:6px 12px;font-size:.97em;" ${page === 1 ? 'disabled' : ''} onclick="renderAdminLists(${page - 1},${perPage})">‹</button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+      // فقط الصفحات: (1,2), (الحالية وما حولها), (قبل الأخيرة والأخيرة)
+      if (
+        i === 1 || i === 2 ||
+        i === totalPages || i === totalPages-1 ||
+        (i >= page - 1 && i <= page + 1)
+      ) {
+        nav += `<button class="submit-btn" style="min-width:34px;padding:5px 0;font-size:.97em;${page === i ? 'background:#27bda5;color:#fff;font-weight:700;border-radius:7px 7px 7px 7px;' : 'background:#fff;color:#18456e;font-weight:500;border:1.2px solid #e4e4e4;'}"
+          onclick="renderAdminLists(${i},${perPage})"${page === i ? ' disabled' : ''}>${i}</button>`;
+      } else if (
+        (i === page - 2 && page > 4) ||
+        (i === page + 2 && page < totalPages - 3)
+      ) {
+        nav += `<span style="margin:0 5px 0 5px; color:#aaa; font-size:1.1em;">...</span>`;
+      }
+    }
+
+    nav += `<button class="submit-btn" style="padding:6px 12px;font-size:.97em;" ${page === totalPages ? 'disabled' : ''} onclick="renderAdminLists(${page + 1},${perPage})">›</button>`;
+    nav += "</div>";
+    container.insertAdjacentHTML("beforeend", nav);
+  }
 }
 
 // Delete a provider
-function deleteProvider(idx) {
+function deleteProvider(providerId) {
+  const idx = providers.findIndex(p => p.id === providerId);
+  if(idx === -1) return;
   if(!confirm("هل أنت متأكد من حذف هذا المزود؟ لا يمكن التراجع.")) return;
   providers.splice(idx,1);
   saveData();
   toast("تم حذف المزود بنجاح.");
-  renderAdminLists();
+
+  // ضبط الصفحة الحالية بعد الحذف (حتى لا تظل على صفحة فارغة لو حذفت آخر عنصر)
+  const totalPages = Math.ceil(providers.length / perPage);
+  if (currentPage > totalPages) currentPage = totalPages || 1;
+
+  renderAdminLists(currentPage, perPage); // هذا هو التغيير الحقيقي
   drawCharts();
 }
 
 // Open modal to edit provider details
-function openEditModal(idx) {
+// Open modal to edit provider details (مُحسّنة باستخدام id بدل الفهرس)
+function openEditModal(providerId) {
+  const idx = providers.findIndex(p => p.id === providerId);
   const p = providers[idx];
-  if(!p) return;
+  if(idx === -1) return;
   openModal({
     title: "تعديل بيانات المزود",
     content: `
@@ -1487,21 +1634,20 @@ function openEditModal(idx) {
         <label for="editCivilid">رقم الهوية/الرقم المدني *</label>
         <input id="editCivilid" name="editCivilid" type="text" required value="${b64d(p.civilid)||""}" />
         <label for="editAvailability">أوقات التوفر:</label>
-        <select id="editAvailability" name="editAvailability" multiple style="height:95px;">
-          <option value="صباحاً كل يوم">صباحاً كل يوم</option>
-          <option value="مساءً كل يوم">مساءً كل يوم</option>
-          <option value="كل الأيام">كل الأيام</option>
-          <option value="الجمعة">الجمعة</option>
-          <option value="صباح الجمعة">صباح الجمعة</option>
-          <option value="مساء الجمعة">مساء الجمعة</option>
-          <option value="الأحد">الأحد</option>
-          <option value="الاثنين">الاثنين</option>
-          <option value="الثلاثاء">الثلاثاء</option>
-          <option value="الأربعاء">الأربعاء</option>
-          <option value="الخميس">الخميس</option>
-          <option value="الجمعة">الجمعة</option>
-          <option value="السبت">السبت</option>
-        </select>
+        <div id="editAvailability" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px;">
+          <label><input type="checkbox" name="editAvailability" value="صباحاً كل يوم"> صباحاً كل يوم</label>
+          <label><input type="checkbox" name="editAvailability" value="مساءً كل يوم"> مساءً كل يوم</label>
+          <label><input type="checkbox" name="editAvailability" value="كل الأيام"> كل الأيام</label>
+          <label><input type="checkbox" name="editAvailability" value="الجمعة"> الجمعة</label>
+          <label><input type="checkbox" name="editAvailability" value="صباح الجمعة"> صباح الجمعة</label>
+          <label><input type="checkbox" name="editAvailability" value="مساء الجمعة"> مساء الجمعة</label>
+          <label><input type="checkbox" name="editAvailability" value="الأحد"> الأحد</label>
+          <label><input type="checkbox" name="editAvailability" value="الاثنين"> الاثنين</label>
+          <label><input type="checkbox" name="editAvailability" value="الثلاثاء"> الثلاثاء</label>
+          <label><input type="checkbox" name="editAvailability" value="الأربعاء"> الأربعاء</label>
+          <label><input type="checkbox" name="editAvailability" value="الخميس"> الخميس</label>
+          <label><input type="checkbox" name="editAvailability" value="السبت"> السبت</label>
+        </div>
         <label for="editBio">الخبرة أو نبذة عن الخدمة</label>
         <textarea id="editBio" name="editBio" rows="3">${p.bio || ""}</textarea>
         <button class="submit-btn" type="submit">حفظ التعديلات</button>
@@ -1526,10 +1672,12 @@ function openEditModal(idx) {
           subSelect.disabled = true;
         }
       }
-      // حدد أوقات التوفر المختارة سابقًا
-      const avSel = modalEl.querySelector("#editAvailability");
-      if(Array.isArray(p.availability)) {
-        [...avSel.options].forEach(opt => { if(p.availability.includes(opt.value)) opt.selected = true; });
+      // تأشير الأيام المختارة للمزود
+      if (Array.isArray(p.availability)) {
+        p.availability.forEach(val => {
+          const checkbox = modalEl.querySelector(`#editAvailability input[type="checkbox"][value="${val}"]`);
+          if (checkbox) checkbox.checked = true;
+        });
       }
       // Handle form submission
       modalEl.querySelector("#editForm").addEventListener("submit", e => {
@@ -1542,7 +1690,7 @@ function openEditModal(idx) {
         const location = modalEl.querySelector("#editLocation").value.trim();
         const phone = modalEl.querySelector("#editPhone").value.trim();
         const civilid = modalEl.querySelector("#editCivilid").value.trim();
-        const availability = Array.from(modalEl.querySelector("#editAvailability").selectedOptions).map(o=>o.value);
+        const availability = Array.from(modalEl.querySelectorAll('#editAvailability input[type="checkbox"]:checked')).map(c => c.value)
         const bio = modalEl.querySelector("#editBio").value.trim();
         if(!name || !nationality || !gender || !section || !sub || !location || !phone || !civilid) {
           alert("يرجى ملء جميع الحقول المطلوبة.");
@@ -1562,7 +1710,7 @@ function openEditModal(idx) {
         saveData();
         toast("تم حفظ التعديلات.");
         closeModal();
-        renderAdminLists();
+        renderAdminLists(currentPage, perPage);
         drawCharts();
       });
     }
@@ -1733,7 +1881,6 @@ function showFeedbackModal() {
   });
 }
 
-// --- إحصائيات سريعة كروت الإدارة ---
 function updateStatsCards() {
   document.getElementById("statProviders").textContent = providers.length;
   document.getElementById("statRequests").textContent = requests.length;
@@ -1749,7 +1896,32 @@ function updateStatsCards() {
     topNat = Object.entries(count).sort((a,b)=>b[1]-a[1])[0][0];
   }
   document.getElementById("statTopNat").textContent = topNat;
+
+  // === الإحصائيات الجديدة ===
+
+  // عدد المناطق/الولايات المغطاة
+  let uniqueLocations = new Set(providers.map(p => p.location).filter(Boolean));
+  document.getElementById("statLocations").textContent = uniqueLocations.size;
+
+  // نسبة الذكور إلى الإناث
+  let males = providers.filter(p => p.gender === "M").length;
+  let females = providers.filter(p => p.gender === "F").length;
+  let genderText = `${males} ♂️ / ${females} ♀️`;
+  if (males + females > 0) {
+    let percentM = Math.round((males/(males+females))*100);
+    let percentF = 100 - percentM;
+    genderText += ` (${percentM}% ♂️ / ${percentF}% ♀️)`;
+  }
+  document.getElementById("statGender").textContent = genderText;
+
+  // أكثر الأقسام نشاطًا
+  let sectionCounts = {};
+  providers.forEach(p => { sectionCounts[p.section] = (sectionCounts[p.section]||0)+1; });
+  let maxSectionId = Object.entries(sectionCounts).sort((a,b)=>b[1]-a[1])[0]?.[0];
+  let maxSectionName = sections.find(s=>s.id===maxSectionId)?.name || "-";
+  document.getElementById("statActiveSection").textContent = maxSectionName;
 }
+
 
 // --- Download all data as CSV ---
 function downloadAllData() {
@@ -2046,45 +2218,6 @@ function downloadAllDataPdf() {
 </script>
 
 <!-- ⭐ Service Worker (PWA) - مدمج مع الصفحة -->
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    const swCode = `
-      const CACHE_NAME = 'foran-cache-v1';
-      const URLS_TO_CACHE = [
-        location.pathname,
-        'https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap'
-      ];
-      self.addEventListener('install', e => {
-        e.waitUntil(
-          caches.open(CACHE_NAME)
-            .then(cache => cache.addAll(URLS_TO_CACHE))
-        );
-      });
-      self.addEventListener('fetch', e => {
-        e.respondWith(
-          caches.match(e.request)
-            .then(res => res || fetch(e.request))
-        );
-      });
-      self.addEventListener('activate', e => {
-        e.waitUntil(
-          caches.keys().then(keys =>
-            Promise.all(
-              keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
-            )
-          )
-        );
-      });
-    `;
-    const blob = new Blob([swCode], {type: 'application/javascript'});
-    const swUrl = URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swUrl).then(function(reg) {
-      setTimeout(()=>URL.revokeObjectURL(swUrl), 5000);
-    });
-  });
-}
-</script>
 
 <!-- ⭐ Service Worker (PWA) - كل شيء مدمج داخل index.html -->
 <script>
