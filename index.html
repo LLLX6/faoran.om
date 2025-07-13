@@ -786,197 +786,362 @@ body.dark .admin-section-card {
 body.dark .admin-section-card h3 {
   color: #ffd200;
 }
-/* === الكود الجديد للتوافق مع الهواتف - نهائي ومحسّن + شريط التخصصات === */
+/* === تحسينات السايدبار والهيدر والشعار للهواتف وأجهزة الكمبيوتر === */
 
-/* شريط التخصصات الأفقي chips-scroll لجميع الشاشات */
+/* الهيدر والشعار والمسافة بين الاسم والشعار لكل الأجهزة */
+.brandbar {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  min-height: 50px;
+  height: 56px;
+  padding: 6px 2vw 6px 10px;
+  background: #fff;
+  box-shadow: 0 2px 8px #18456e12;
+  gap: 10px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1001;
+}
+.brandbar .app-logo, .brandbar svg, .brandbar img {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+.brandbar .app-name, .brandbar > div > span, .brandbar span, .brandbar h1 {
+  font-size: 1.15em;
+  font-weight: bold;
+  color: #18456e;
+  letter-spacing: 0.02em;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+.brandbar .hamburger {
+  margin-left: 6px;
+}
+
+/* زر الهامبرغر */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px 7px;
+  margin-right: 7px;
+}
+.hamburger div {
+  width: 24px;
+  height: 3.5px;
+  border-radius: 3px;
+  background: #18456e;
+  transition: all 0.2s;
+}
+
+/* السايدبار - متجاوبة مع الجوال والكمبيوتر */
+.sidebar {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  padding: 20px 10px 25px 7px;
+  width: 220px;
+  min-width: 190px;
+  min-height: 100vh;
+  box-shadow: 0 3px 15px #0001;
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  z-index: 1200;
+  transition: transform 0.28s cubic-bezier(.61,.01,.53,.96), right 0.2s;
+  transform: translateX(0);
+}
+.sidebar .close-sidebar {
+  display: none;
+  font-size: 1.6em;
+  background: none;
+  border: none;
+  color: #222;         /* لون داكن جدًا */
+  padding: 7px 13px 5px 0;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: color 0.18s;
+}
+.sidebar .close-sidebar:hover {
+  color: #c0392b;      /* لون أحمر داكن عند المرور */
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    right: 0;
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    width: 93vw;
+    min-width: unset;
+    max-width: 98vw;
+    height: 100vh;
+    box-shadow: -6px 0 18px #18456e22;
+  }
+  .sidebar.active {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: all;
+    display: flex;
+  }
+  .hamburger, .only-mobile {
+    display: flex !important;
+  }
+  .sidebar .close-sidebar {
+    display: block;
+  }
+}
+
+/* تحسينات إضافية للهيدر على الشاشات الصغيرة */
+@media (max-width: 650px) {
+  .brandbar {
+    min-height: 38px;
+    height: 43px;
+    padding: 4px 1vw 4px 6px;
+    gap: 8px;
+  }
+  .brandbar .app-logo, .brandbar svg, .brandbar img {
+    width: 26px;
+    height: 26px;
+  }
+  .brandbar .app-name, .brandbar > div > span, .brandbar span, .brandbar h1 {
+    font-size: 0.97em;
+  }
+  .hamburger, .only-mobile {
+    display: flex !important;
+  }
+}
+
+/* تحسين إضافي للشاشات الصغيرة جداً */
+@media (max-width: 410px) {
+  .brandbar {
+    min-height: 32px;
+    height: 36px;
+    padding: 2.5px 1vw 2.5px 3px;
+    gap: 5px;
+  }
+  .brandbar .app-logo, .brandbar svg, .brandbar img {
+    width: 21px;
+    height: 21px;
+  }
+  .brandbar .app-name, .brandbar > div > span, .brandbar span, .brandbar h1 {
+    font-size: 0.90em;
+  }
+}
+
+/* تصغير المسافات بين عنوان القسم (مثلا: "الأقسام الرئيسية") والأزرار */
+.main h2 {
+  margin-top: 12px !important;
+  margin-bottom: 17px !important;
+  font-size: 1.22em;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+@media (max-width:650px){
+  .main h2 {
+    margin-top: 8px !important;
+    margin-bottom: 10px !important;
+    font-size: 1.08em;
+  }
+}
+/* === قسم شريط الإيموجيات الأفقي المحسن للهواتف === */
+.emoji-strip, .emojis-list {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 13px 0 10px 0;
+  margin-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #c2d7ef #f2f7fc;
+  -webkit-overflow-scrolling: touch;
+}
+.emoji-strip::-webkit-scrollbar, .emojis-list::-webkit-scrollbar {
+  height: 5px;
+  background: #f2f7fc;
+}
+.emoji-strip::-webkit-scrollbar-thumb, .emojis-list::-webkit-scrollbar-thumb {
+  background: #c2d7ef;
+  border-radius: 5px;
+}
+
+/* بطاقة الإيموجي */
+.emoji-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px #b2c6e530;
+  min-width: 70px;
+  max-width: 85px;
+  padding: 9px 7px 5px 7px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, transform 0.15s;
+  cursor: pointer;
+  flex-shrink: 0;
+  border: 1.5px solid #e8eefa;
+}
+.emoji-card:hover, .emoji-card.active {
+  box-shadow: 0 4px 16px #7fa9d840;
+  transform: translateY(-2px) scale(1.04);
+  border: 1.5px solid #4785d7;
+}
+
+/* الإيموجي */
+.emoji-card .emoji {
+  font-size: 2em;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* عنوان التخصص تحت الإيموجي */
+.emoji-card .emoji-title {
+  font-size: 0.93em;
+  font-weight: 600;
+  color: #18456e;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.28;
+  margin: 0 auto;
+  padding: 0 2px;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* هواتف صغيرة جدًا */
+@media (max-width: 500px) {
+  .emoji-card {
+    min-width: 62px;
+    max-width: 78px;
+    padding: 8px 5px 4px 5px;
+  }
+  .emoji-card .emoji {
+    font-size: 1.65em;
+  }
+  .emoji-card .emoji-title {
+    font-size: 0.88em;
+    padding: 0 1px;
+  }
+}
 .chips-scroll {
   display: flex;
   flex-direction: row;
-  gap: 7px;
-  align-items: center;
+  gap: 9px;
   overflow-x: auto;
-  padding: 7px 0 2px 0;
+  padding: 11px 0 10px 0;
+  margin-bottom: 12px;
   scrollbar-width: thin;
-  scrollbar-color: #bbb #f7f7f7;
+  scrollbar-color: #c2d7ef #f2f7fc;
+  -webkit-overflow-scrolling: touch;
 }
 .chips-scroll::-webkit-scrollbar {
   height: 5px;
-  background: #f7f7f7;
+  background: #f2f7fc;
 }
 .chips-scroll::-webkit-scrollbar-thumb {
-  background: #bbb;
+  background: #c2d7ef;
   border-radius: 5px;
 }
-.chip {
-  flex: 0 0 auto;
-  min-width: 64px;
-  max-width: 160px;
+.chips-scroll {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 12px 0 10px 0;
+  margin-bottom: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: #c2d7ef #f2f7fc;
+  -webkit-overflow-scrolling: touch;
+  /* لجعل الأزرار بدون التفاف */
   white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+}
+.chips-scroll > * {
+  flex-shrink: 0;
+}
+.chips-scroll::-webkit-scrollbar {
+  height: 5px;
+  background: #f2f7fc;
+}
+.chips-scroll::-webkit-scrollbar-thumb {
+  background: #c2d7ef;
+  border-radius: 5px;
+}
+/* تصغير الفراغ العلوي بين الشعار والأقسام */
+.main {
+  padding-top: 16px !important;
 }
 
-/* === الكود الجديد للتوافق مع الهواتف - نهائي ومحسّن === */
+/* تصغير المسافة بين عنوان القسم وأعلى الصفحة */
+.main h2 {
+  margin-top: 6px !important;
+  margin-bottom: 14px !important;
+}
+
+/* تقليل ارتفاع الشعار أو الهيدر إن كان كبيراً */
+.brandbar {
+  min-height: 36px !important;
+  height: 42px !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* للهواتف: تقليل الفراغ أكثر */
 @media (max-width: 650px) {
-  /* تصغير الشريط الجانبي للعرض الصغير */
-  .sidebar {
-    width: 94vw !important;
-    min-width: unset !important;
-    max-width: 98vw !important;
-    padding: 18px 2vw 24px 2vw !important;
-    box-sizing: border-box;
-  }
-
-  /* زر العودة للقسم الرئيسي دائم الظهور وثابت */
-  .back-btn {
-    display: flex !important;
-    position: sticky !important;
-    top: 62px !important;
-    z-index: 1111 !important;
-    width: 96vw !important;
-    max-width: 99vw !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    margin-bottom: 12px !important;
-    left: 0 !important;
-    right: 0 !important;
-  }
-
-  /* ضبط الحاوية الرئيسية والفرعية */
   .main {
-    margin: 0 !important;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-    padding: 70px 2vw 12px 2vw !important;
-    min-width: 100vw !important;
-    max-width: 100vw !important;
-    box-sizing: border-box;
+    padding-top: 8px !important;
   }
-  .container, .content, .wrapper {
-    width: 100vw !important;
-    min-width: 100vw !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-sizing: border-box;
-  }
-
-  /* أزرار العمليات والفورمات */
-  .show-modal-btn, .submit-btn, .dl-btn, .add-feedback-btn {
-    font-size: 1.01rem;
-    padding: 11px 5px !important;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 7px;
-  }
-  .card-actions {
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  /* رأس القسم العلوي والعناوين */
-  .section-topbar {
-    flex-direction: column !important;
-    gap: 7px !important;
-    text-align: center !important;
-  }
-  .section-topbar h2 {
-    font-size: 1.1em !important;
-  }
-
-  /* شريط البحث */
-  .searchbar-wrap {
-    flex-direction: column !important;
-    gap: 7px !important;
-    width: 100% !important;
-    align-items: stretch !important;
-  }
-  .show-modal-btn {
-    width: 100% !important;
-    min-width: 0 !important;
-    font-size: 1.01em;
-  }
-  .searchbar {
-    min-width: 0 !important;
-    width: 100% !important;
-  }
-
-  /* إصلاح الايموجيات المتعددة التخصصات: الصف الأفقي يسحب ككل وليس كل عنصر */
-  .emoji-row, .sub-emojis-row, .chips-scroll {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    gap: 10px !important;
-    margin-bottom: 12px !important;
-    scrollbar-width: thin;
-    scrollbar-color: #bbb #f7f7f7;
-  }
-  .emoji-row::-webkit-scrollbar, .sub-emojis-row::-webkit-scrollbar, .chips-scroll::-webkit-scrollbar {
-    height: 5px;
-    background: #f7f7f7;
-  }
-  .emoji-row::-webkit-scrollbar-thumb, .sub-emojis-row::-webkit-scrollbar-thumb, .chips-scroll::-webkit-scrollbar-thumb {
-    background: #bbb;
-    border-radius: 5px;
-  }
-  .sub-emoji-btn, .emoji-btn, .chip {
-    flex: 0 0 auto;
-    min-width: 60px;
-    max-width: 160px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  /* عدم قص الأزرار وعناصر الشبكة */
-  .chip, .filter-row, .card-grid, .modal-box, .section-card, .provider-card {
-    max-width: 98vw !important;
-    box-sizing: border-box;
-    overflow-x: auto !important;
-  }
-
-  /* الجسم والخلفية */
-  body, html {
-    width: 100vw !important;
-    min-width: 100vw !important;
-    overflow-x: hidden !important;
-    box-sizing: border-box;
-    margin: 0 !important;
-    padding: 0 !important;
+  .brandbar {
+    min-height: 30px !important;
+    height: 34px !important;
   }
 }
 
 </style>
 </head>
 <body>
+
 <!-- Brand Bar -->
 <header class="brandbar" role="banner" aria-label="شريط الموقع">
-  <div style="display:flex;align-items:center;gap:10px;">
+  <div class="brandbar-inner">
     <!-- شعار فوراً الجديد -->
-    <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="شعار فوراً" style="background:#fff;border-radius:50%;box-shadow:0 2px 8px #18456e22;">
+    <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="شعار فوراً">
       <circle cx="24" cy="24" r="20" fill="#22c1c3"/>
       <path d="M16 28 L24 16 L32 28" stroke="#18456e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       <path d="M24 34 L24 22" stroke="#ffd200" stroke-width="3.2" stroke-linecap="round"/>
       <circle cx="24" cy="16" r="3.5" fill="#ffd200"/>
     </svg>
-    <span style="font-weight:900;font-size:1.35em;letter-spacing:.5px;">فوراً - منصة الخدمات الذكية</span>
+    <span class="app-name">فوراً - منصة الخدمات الذكية</span>
+    <button id="hamburger" class="hamburger only-mobile" aria-label="فتح القائمة الجانبية" aria-expanded="false" aria-controls="sidebarNav" type="button">
+      <div></div><div></div><div></div>
+    </button>
   </div>
 </header>
 
-  <!-- Hamburger -->
-  <button id="hamburger" class="hamburger" aria-label="فتح القائمة الجانبية" aria-expanded="false" aria-controls="sidebarNav" type="button" tabindex="0">
-    <div></div><div></div><div></div>
-  </button>
-
-  <!-- Sidebar Navigation -->
-  <nav id="sidebarNav" class="sidebar" aria-label="القائمة الرئيسية" role="navigation">
-    <h1>فوراً</h1>
-    <button data-page="home" type="button">🏠 الرئيسية</button>
-    <button data-page="register" type="button">✍️ طلب تسجيل مزوّد خدمة</button>
-    <button data-page="filter" type="button">🔍 بحث وفلترة</button>
-    <button id="adminBtn" type="button">⚙️ لوحة الإدارة</button>
-    <button class="toggle-theme" id="themeBtn" type="button" aria-pressed="false">🌓 تبديل النمط</button>
-    <button class="add-feedback-btn" id="feedbackBtn" type="button">💬 أضف شكوى/اقتراح</button>
-  </nav>
+<!-- Sidebar Navigation -->
+<nav id="sidebarNav" class="sidebar" aria-label="القائمة الرئيسية" role="navigation">
+  <button class="close-sidebar only-mobile" aria-label="إغلاق القائمة" type="button">&times;</button>
+  <h1>فوراً</h1>
+  <button data-page="home" type="button">🏠 الرئيسية</button>
+  <button data-page="register" type="button">✍️ طلب تسجيل مزوّد خدمة</button>
+  <button data-page="filter" type="button">🔍 بحث وفلترة</button>
+  <button id="adminBtn" type="button">⚙️ لوحة الإدارة</button>
+  <button class="toggle-theme" id="themeBtn" type="button" aria-pressed="false">🌓 تبديل النمط</button>
+  <button class="add-feedback-btn" id="feedbackBtn" type="button">💬 أضف شكوى/اقتراح</button>
+</nav>
 
   <!-- Overlay for mobile -->
   <div id="navOverlay" class="overlay-nav" tabindex="-1" aria-hidden="true"></div>
@@ -1168,12 +1333,22 @@ function toast(msg) {
   toastRoot.appendChild(t);
   setTimeout(() => t.remove(), 2800);
 }
-
 // --- Sidebar & Hamburger ---
 const sidebar = document.getElementById("sidebarNav");
 const hamburger = document.getElementById("hamburger");
 const overlay = document.getElementById("navOverlay");
 const main = document.getElementById("mainContent");
+
+// زر الإغلاق داخل السايدبار
+const closeSidebarBtn = document.querySelector(".close-sidebar");
+if (closeSidebarBtn) {
+  closeSidebarBtn.onclick = () => toggleSidebar(true);
+}
+
+// النقر على الخلفية أيضاً يغلق القائمة
+if (overlay) {
+  overlay.onclick = () => toggleSidebar(true);
+}
 
 function isMobileView() { return window.innerWidth <= 900; }
 function toggleSidebar(forceClose = false) {
