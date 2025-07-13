@@ -1313,6 +1313,91 @@ const sections = [
       {id:"account",   label:"محاسبة",          emojiM:"📊",   emojiF:"📊"},
       {id:"translate", label:"ترجمة",           emojiM:"🌐",   emojiF:"🌐"}
     ]
+  },
+  // ------------------- الأقسام الجديدة -------------------
+  {
+    id: "health", name: "الصحة والعناية", emoji: "🏥", sub: [
+      {id: "nurse", label: "ممرض/ممرضة", emojiM: "🧑‍⚕️", emojiF: "👩‍⚕️"},
+      {id: "pharma", label: "صيدلي/صيدلانية", emojiM: "💊", emojiF: "💊"},
+      {id: "dentist", label: "طبيب أسنان", emojiM: "🦷", emojiF: "🦷"},
+      {id: "lab", label: "فني مختبر", emojiM: "🧪", emojiF: "🧪"}
+    ]
+  },
+  {
+    id: "education", name: "التعليم والدروس", emoji: "📚", sub: [
+      {id: "teacher", label: "مدرس/مدرسة", emojiM: "👨‍🏫", emojiF: "👩‍🏫"},
+      {id: "privateTutor", label: "مدرس خصوصي", emojiM: "📖", emojiF: "📖"},
+      {id: "coach", label: "مدرب/مدربة", emojiM: "🏋️", emojiF: "🤸"}
+    ]
+  },
+  {
+    id: "express", name: "النقل السريع", emoji: "🚀", sub: [
+      {id: "bikeCourier", label: "مندوب دراجة", emojiM: "🚴", emojiF: "🚴‍♀️"},
+      {id: "expressDriver", label: "سائق سريع", emojiM: "🚕", emojiF: "🚕"}
+    ]
+  },
+  {
+    id: "beauty", name: "الجمال والعناية", emoji: "💇‍♂️", sub: [
+      {id: "hairdresser", label: "حلاق/حلاقة", emojiM: "💇‍♂️", emojiF: "💇‍♀️"},
+      {id: "spa", label: "سبا وتدليك", emojiM: "💆‍♂️", emojiF: "💆‍♀️"}
+    ]
+  },
+  {
+    id: "events", name: "تنظيم الفعاليات", emoji: "🎤", sub: [
+      {id: "eventOrg", label: "منظم فعاليات", emojiM: "🎤", emojiF: "🎤"},
+      {id: "photographer", label: "مصور/مصورة", emojiM: "📸", emojiF: "📸"}
+    ]
+  },
+  {
+    id: "legal", name: "القانون والاستشارات", emoji: "⚖️", sub: [
+      {id: "lawyer", label: "محام/محامية", emojiM: "⚖️", emojiF: "⚖️"},
+      {id: "notary", label: "كاتب عدل", emojiM: "📝", emojiF: "📝"}
+        ]
+  },
+  {
+    id: "sports", name: "الرياضة واللياقة", emoji: "🏋️‍♂️", sub: [
+      {id: "personalTrainer", label: "مدرب شخصي",      emojiM: "🏋️‍♂️", emojiF: "🏋️‍♀️"},
+      {id: "yoga",            label: "مدرب يوغا",       emojiM: "🧘‍♂️", emojiF: "🧘‍♀️"},
+      {id: "swim",            label: "مدرب سباحة",      emojiM: "🏊‍♂️", emojiF: "🏊‍♀️"},
+      {id: "football",        label: "مدرب كرة قدم",     emojiM: "⚽",    emojiF: "⚽"},
+      {id: "referee",         label: "حكم رياضي",        emojiM: "🧑‍⚖️", emojiF: "🧑‍⚖️"}
+    ]
+  },
+  {
+    id: "media", name: "الإعلام والإنتاج", emoji: "🎥", sub: [
+      {id: "videographer", label: "مصور فيديو",         emojiM: "📹", emojiF: "📹"},
+      {id: "editor",       label: "مونتير",             emojiM: "🎬", emojiF: "🎬"},
+      {id: "voiceover",    label: "معلق صوتي",           emojiM: "🎤", emojiF: "🎤"},
+      {id: "writer",       label: "كاتب محتوى",          emojiM: "📝", emojiF: "📝"},
+      {id: "social",       label: "مدير سوشال ميديا",    emojiM: "📱", emojiF: "📱"}
+    ]
+  },
+  {
+    id: "animals", name: "الحيوانات والعناية", emoji: "🐾", sub: [
+      {id: "vet",        label: "طبيب بيطري",           emojiM: "🐶", emojiF: "🐱"},
+      {id: "groomer",    label: "حلاق حيوانات",         emojiM: "✂️", emojiF: "✂️"},
+      {id: "walker",     label: "مرافق كلاب",            emojiM: "🚶‍♂️", emojiF: "🚶‍♀️"},
+      {id: "trainer",    label: "مدرب حيوانات",          emojiM: "🦴", emojiF: "🦴"},
+      {id: "boarding",   label: "استضافة حيوانات",       emojiM: "🏠", emojiF: "🏠"}
+    ]
+  },
+  {
+    id: "construction", name: "البناء والمقاولات", emoji: "🏗️", sub: [
+      {id: "mason",       label: "بناء/بنائية",         emojiM: "🧱", emojiF: "🧱"},
+      {id: "tiles",       label: "تركيب بلاط",           emojiM: "🪨", emojiF: "🪨"},
+      {id: "roofer",      label: "عامل أسطح",            emojiM: "🏠", emojiF: "🏠"},
+      {id: "concrete",    label: "صب خرسانة",            emojiM: "🚧", emojiF: "🚧"},
+      {id: "painter",     label: "دهان مباني",           emojiM: "🖌️", emojiF: "🖌️"}
+    ]
+  },
+  {
+    id: "tourism", name: "السياحة والسفر", emoji: "🌍", sub: [
+      {id: "guide",         label: "مرشد سياحي",        emojiM: "🧑‍💼", emojiF: "🧑‍💼"},
+      {id: "planner",       label: "منظم رحلات",        emojiM: "🗺️", emojiF: "🗺️"},
+      {id: "visa",          label: "مساعد تأشيرات",     emojiM: "🛂", emojiF: "🛂"},
+      {id: "hotelBook",     label: "حجز فنادق",         emojiM: "🏨", emojiF: "🏨"},
+      {id: "translator",    label: "مترجم سياحي",       emojiM: "🌐", emojiF: "🌐"}
+    ]
   }
 ];
 
