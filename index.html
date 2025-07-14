@@ -1109,6 +1109,14 @@ body.dark .admin-section-card h3 {
     height: 43px !important;
   }
 }
+.provider-photo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 9px;
+  box-shadow: 0 1px 8px #eee;
+}
 
 </style>
 </head>
@@ -1777,6 +1785,10 @@ function renderRegister() {
       </div>
       <label class="tooltip" for="bio">الخبرة أو نبذة (اختياري)</label>
       <textarea id="bio" name="bio" rows="3"></textarea>
+<label class="tooltip" for="profilePic">الصورة الشخصية (اختياري)</label>
+<input id="profilePic" name="profilePic" type="file" accept="image/*" />
+<label class="tooltip" for="idCard">صورة بطاقة الهوية *</label>
+<input id="idCard" name="idCard" type="file" accept="image/*" required />
       <button class="submit-btn" type="submit">إرسال الطلب</button>
     </form>
   `;
@@ -2016,6 +2028,7 @@ function renderRequests() {
     const sub = (sec.sub || []).find(x => x.id === r.sub) || {};
 container.insertAdjacentHTML("beforeend", `
   <article class="provider-card" tabindex="0" aria-label="طلب تسجيل مزود خدمة: ${r.name}">
+    ${r.profilePic ? `<img src="${r.profilePic}" class="provider-photo" alt="صورة المزود" />` : ""}
     <div class="provider-emoji">${r.gender === "F" ? (sub.emojiF || sec.emoji) : (sub.emojiM || sec.emoji)}</div>
     <div class="provider-info">
       <div style="font-size:1.06em; font-weight:700;">${r.name}</div>
@@ -2259,22 +2272,61 @@ function openEditModal(providerId) {
           alert("يرجى ملء جميع الحقول المطلوبة.");
           return;
         }
-        p.name = name;
-        p.nationality = nationality;
-        p.gender = gender;
-        p.section = section;
-        p.sub = sub;
-        p.location = location;
-        p.phone = b64e(phone);
-        p.civilid = b64e(civilid);
-        p.availability = availability;
-        p.bio = bio;
-        p.updated = new Date().toISOString();
-        saveData();
-        toast("تم حفظ التعديلات.");
-        closeModal();
-        renderAdminLists(currentPage, perPage);
-        drawCharts();
+const editProfilePicInput = modalEl.querySelector("#editProfilePic");
+const editIdCardInput = modalEl.querySelector("#editIdCard");
+
+// دالة مساعدة لحفظ بقية البيانات بعد قراءة الصور
+function saveEditedProvider(profilePicData, idCardPicData) {
+  p.name = name;
+  p.nationality = nationality;
+  p.gender = gender;
+  p.section = section;
+  p.sub = sub;
+  p.location = location;
+  p.phone = b64e(phone);
+  p.civilid = b64e(civilid);
+  p.availability = availability;
+  p.bio = bio;
+  p.updated = new Date().toISOString();
+
+  // --- أضف الصورة الشخصية فقط إذا رفع صورة جديدة
+  if (profilePicData !== undefined) p.profilePic = profilePicData;
+  // --- أضف صورة الهوية فقط إذا رفع صورة جديدة
+  if (idCardPicData !== undefined) p.idCardPic = idCardPicData;
+
+  saveData();
+  toast("تم حفظ التعديلات.");
+  closeModal();
+  renderAdminLists(currentPage, perPage);
+  drawCharts();
+}
+
+// --- الآن قراءة الصورة الشخصية أولاً
+if (editProfilePicInput && editProfilePicInput.files[0]) {
+  const readerPic = new FileReader();
+  readerPic.onload = function(e) {
+    // بعدها نقرأ بطاقة الهوية إذا وجدت
+    if (editIdCardInput && editIdCardInput.files[0]) {
+      const readerId = new FileReader();
+      readerId.onload = function(e2) {
+        saveEditedProvider(e.target.result, e2.target.result);
+      };
+      readerId.readAsDataURL(editIdCardInput.files[0]);
+    } else {
+      saveEditedProvider(e.target.result, undefined);
+    }
+  };
+  readerPic.readAsDataURL(editProfilePicInput.files[0]);
+} else if (editIdCardInput && editIdCardInput.files[0]) {
+  const readerId = new FileReader();
+  readerId.onload = function(e) {
+    saveEditedProvider(undefined, e.target.result);
+  };
+  readerId.readAsDataURL(editIdCardInput.files[0]);
+} else {
+  // لم يتم رفع أي صورة جديدة
+  saveEditedProvider(undefined, undefined);
+}
       });
     }
   });
@@ -2829,7 +2881,112 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+// سياسة الاستخدام: إظهار النافذة عند أول دخول فقط
+function showPolicyModal() {
+  if (!localStorage.getItem("policyAccepted")) {
+    document.getElementById("policyModal").style.display = "flex";
+  }
+}
+function acceptPolicy() {
+  localStorage.setItem("policyAccepted", "yes");
+  document.getElementById("policyModal").style.display = "none";
+  showOTBModal(); // ← ليظهر OTB بعد الموافقة
+}
+
+// عند تحميل الصفحة أول مرة:
+window.addEventListener("DOMContentLoaded", function() {
+  showPolicyModal();
+  // عند قبول سياسة الاستخدام، بعدها نعرض OTB:
+  // إذا كان المستخدم وافق على السياسة، أظهر نافذة OTB مباشرة
+  if (localStorage.getItem("policyAccepted") === "yes") {
+    showOTBModal();
+  }
+});
+
+// تعديل زر الموافقة ليظهر OTB بعد الموافقة:
+function acceptPolicy() {
+  localStorage.setItem("policyAccepted", "yes");
+  document.getElementById("policyModal").style.display = "none";
+  showOTBModal(); // ← هنا أضف هذا السطر ليظهر OTB بعد موافقة المستخدم
+}
+});
+// --- OTB (رمز تحقق الجوال) --- //
+function showOTBModal() {
+  // إذا تم التحقق سابقًا، لا تظهر النافذة
+  if (localStorage.getItem("otbVerified") === "yes") return;
+  // نافذة تطلب رقم الهاتف
+  openModal({
+    title: "التحقق من رقم الهاتف",
+    content: `
+      <form id="otbForm" autocomplete="off">
+        <label for="otbPhone">أدخل رقم هاتفك:</label>
+        <input id="otbPhone" type="tel" required pattern="\\d{8,15}" placeholder="مثال: 99887766" style="margin-bottom:12px;" />
+        <button class="submit-btn" type="submit">إرسال رمز التحقق</button>
+      </form>
+      <div id="otbStep2" style="display:none;margin-top:18px;">
+        <label for="otbCode">أدخل رمز التحقق:</label>
+        <input id="otbCode" type="text" required pattern="\\d{4,6}" maxlength="6" style="margin-bottom:12px;" />
+        <button class="submit-btn" type="button" onclick="verifyOTB()">تحقق</button>
+      </div>
+    `,
+    onShow(modalEl) {
+      const otbForm = modalEl.querySelector("#otbForm");
+      otbForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const phone = otbForm.querySelector("#otbPhone").value.trim();
+        if (phone.length < 8) { alert("أدخل رقم هاتف صحيح!"); return; }
+        
+        // --- الخطوة المهمة هنا: تجهيز إرسال الرمز مستقبلاً ---
+        // استبدل هذا الكود عند الربط الحقيقي مع أي مزود SMS
+        window.generatedOTB = (Math.floor(1000 + Math.random() * 9000)).toString(); // رمز وهمي
+        
+        // هنا ترسل الرمز فعليًا عند توفر API خارجية:
+        // sendOTBRealSMS(phone, window.generatedOTB); // (فعّلها مستقبلا)
+
+        // الآن فقط لأغراض الاختبار: أعرض الرمز للمستخدم
+        alert("رمز التحقق (للتجربة فقط): " + window.generatedOTB);
+
+        // إظهار خانة إدخال الرمز
+        modalEl.querySelector("#otbStep2").style.display = "";
+      });
+    }
+  });
+}
+
+// دالة تحقق الرمز
+function verifyOTB() {
+  const code = document.querySelector("#otbCode").value.trim();
+  if (code === window.generatedOTB) {
+    localStorage.setItem("otbVerified", "yes");
+    toast("تم التحقق بنجاح!");
+    closeModal();
+  } else {
+    alert("رمز خاطئ، حاول مجددًا.");
+  }
+}
+
+// --- دالة فارغة (Dummy) للإرسال الحقيقي ---
+// ستعدلها مستقبلاً حسب خدمة SMS الحقيقية التي ستستخدمها
+function sendOTBRealSMS(phone, code) {
+  // مثال Twilio أو Firebase:
+  // fetch("https://api.smsprovider.com/send", {...})
+  // الآن هي فقط للعرض
+  console.log("[OTB] إرسال رمز حقيقي إلى:", phone, "الكود:", code);
+}
+
 </script>
+<!-- نافذة سياسة الاستخدام تظهر أول مرة فقط -->
+<div id="policyModal" class="modal-bg" style="display:none;">
+  <div class="modal-box">
+    <h2 style="margin:0 0 12px;">سياسة الاستخدام وإخلاء المسؤولية</h2>
+    <div class="modal-content-scroll" style="max-height:200px;">
+      <p>باستخدامك هذا التطبيق، أنت توافق على جميع الشروط والتعليمات فيه. التطبيق وسيط فقط ولا يتحمل أي مسؤولية عن التعاملات أو النتائج أو أي ضرر أو خلاف بين المستخدمين والمزودين. يرجى الحذر وعدم مشاركة بياناتك الشخصية أو المالية إلا مع من تثق بهم تمامًا. أنت وحدك تتحمل مسؤولية أي قرار أو استخدام.</p>
+    </div>
+    <div class="modal-actions-bottom">
+      <button onclick="acceptPolicy()" class="submit-btn">موافق</button>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
